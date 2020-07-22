@@ -78,16 +78,24 @@ public class Operation {
 	public int getSub() {
 		ArrayList<Integer> a = Operation.get();
 		for (;;) {
-			if (ddul(a.get(0), a.get(1))) {
+			if (dddul(a.get(0), a.get(1))) {
 				break;
 			} else {
 				a = Operation.get();
 			}
 		}
+		System.out.print(a.get(0) + " 와 " + a.get(1) + "를 뺀 값은 ? > ");
 		return a.get(0) - a.get(1);
 	}
 	public boolean ddul(int a, int b) {
 		if (a % b == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public boolean dddul(int a, int b) {
+		if (a > b) {
 			return true;
 		} else {
 			return false;

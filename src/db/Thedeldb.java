@@ -48,18 +48,17 @@ public class Thedeldb {
 	}
 
 	// 데이터 넣기
-	public static void insert(String a, String b, int c){
+	public static void insert(String a, String b) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			conn = Thedeldb.condb();
-			String sql = "INSERT INTO user_tbl VALUES (?,?,?)";
+			String sql = "INSERT INTO user_tbl(id, username) VALUES (?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, a);
 			pstmt.setString(2, b);
-			pstmt.setInt(3, c);
 
 			int count = pstmt.executeUpdate();
 			if (count == 0) {
@@ -82,19 +81,20 @@ public class Thedeldb {
 			}
 		}
 	}
+
 	// 데이터 넣기
-	public static void insert(int a, int b){
+	public static void insert(int a, int b) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			conn = Thedeldb.condb();
 			String sql = "INSERT INTO num_tb VALUES (?,?)";
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setInt(1, a);
 			pstmt.setInt(2, b);
-			
+
 			int count = pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("에러 " + e);
@@ -119,13 +119,12 @@ public class Thedeldb {
 		PreparedStatement pstmt = null; // 쿼리 생성
 		ResultSet rs = null;
 		ThedelTB TB = new ThedelTB();
-		
+
 		try {
 
 			conn = Thedeldb.condb();
 			String sql = "SELECT id FROM user_tbl WHERE id = ?";
-			
-			
+
 			pstmt = conn.prepareStatement(sql); // 조건을 만족하는 행만 출력
 
 			pstmt.setString(1, a);
@@ -164,52 +163,52 @@ public class Thedeldb {
 		String id = TB.getCode();
 		return id;
 	}
+
 	public static int ps(String a) {
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null; // 쿼리 생성
 		ResultSet rs = null;
 		ThedelTB TB = new ThedelTB();
 		try {
-			
+
 			conn = Thedeldb.condb();
 			String sql = "SELECT getpoint FROM user_tbl WHERE id = ?";
-			
-			
+
 			pstmt = conn.prepareStatement(sql); // 조건을 만족하는 행만 출력
-			
+
 			pstmt.setString(1, a);
 			rs = pstmt.executeQuery();
-			
+
 			if (rs.next()) {
-				
+
 				int code = rs.getInt(1);
 				TB.setHap(code);
-				
+
 			}
-			
+
 		}
-		
+
 		catch (Exception e) {
-			
+
 			System.out.println(e.getMessage());
-			
+
 		}
-		
+
 		finally {
-			
+
 			try {
-				
+
 				pstmt.close();
-				
+
 				conn.close();
-				
+
 			} catch (Exception e) {
-				
+
 				System.out.println(e.getMessage());
-				
+
 			}
-			
+
 		}
 		int code = TB.getHap();
 		return code;
@@ -225,7 +224,7 @@ public class Thedeldb {
 			conn = Thedeldb.condb();
 			String sql = "SELECT * FROM num_tb";
 			pstmt = conn.prepareStatement(sql); // 쿼리생성
-			rs = pstmt.executeQuery(); //쿼리에 익스큐트
+			rs = pstmt.executeQuery(); // 쿼리에 익스큐트
 
 			System.out.println("num1" + " " + "num2");
 			while (rs.next()) {
@@ -253,6 +252,7 @@ public class Thedeldb {
 			}
 		}
 	}
+
 	// 테이터 전체 보기
 	public static int userselect(String a) {
 		ThedelTB tb = new ThedelTB();
@@ -265,8 +265,8 @@ public class Thedeldb {
 			String sql = "SELECT getpoint FROM user_tbl WHERE id =?";
 			pstmt = conn.prepareStatement(sql); // 쿼리생성
 			pstmt.setNString(1, a);
-			rs = pstmt.executeQuery(); //쿼리에 익스큐트
-			
+			rs = pstmt.executeQuery(); // 쿼리에 익스큐트
+
 			if (rs.next()) {
 				point = rs.getInt("getpoint");
 				tb.setPoint(point);
@@ -291,7 +291,7 @@ public class Thedeldb {
 			}
 		}
 		point = tb.getPoint();
-		return point; 
+		return point;
 	}
 
 	// 데이터 삭제
@@ -318,7 +318,6 @@ public class Thedeldb {
 			// 5. SQL 문장을 실행하고 결과를 리턴 - SQL 문장 실행 후, 변경된 row 수 int type 리턴
 			int r = pstmt.executeUpdate();
 
-
 		} catch (Exception e) {
 
 			System.out.println("[SQL Error : " + e.getMessage() + "]");
@@ -343,54 +342,52 @@ public class Thedeldb {
 			}
 		}
 	}
-	//업데이트
+
+	// 업데이트
 	public static void update(int a, String b) {
-			Connection conn = null;                                     // 데이터 베이스와 연결을 위한 객체
-	        PreparedStatement pstmt = null;                            // SQL 문을 데이터베이스에 보내기위한 객체
+		Connection conn = null; // 데이터 베이스와 연결을 위한 객체
+		PreparedStatement pstmt = null; // SQL 문을 데이터베이스에 보내기위한 객체
 
+		try {
+			// 1. JDBC 드라이버 로딩 - MySQL JDBC 드라이버의 Driver Class 로딩
+			String SQL = "update user_tbl set getpoint=? WHERE id =?";
 
+			// 2. Connection 생성 - .getConnection(연결문자열, DB-ID, DB-PW)
+			conn = Thedeldb.condb();
 
-	        try {
-	            // 1. JDBC 드라이버 로딩 - MySQL JDBC 드라이버의 Driver Class 로딩
-	        	String SQL = "update user_tbl set getpoint=? WHERE id =?";
+			// 3. PreParedStatement 객체 생성, 객체 생성시 SQL 문장 저장
+			pstmt = conn.prepareStatement(SQL);
 
-	            // 2. Connection 생성 - .getConnection(연결문자열, DB-ID, DB-PW)
-	            conn = Thedeldb.condb();
+			// 4. pstmt.set<데이터타입>(? 순서, 값) ex).setString(), .setInt ...
+			pstmt.setInt(1, a);
+			pstmt.setString(2, b);
 
-	            // 3. PreParedStatement 객체 생성, 객체 생성시 SQL 문장 저장
-	            pstmt = conn.prepareStatement(SQL);
+			// 5. SQL 문장을 실행하고 결과를 리턴 - SQL 문장 실행 후, 변경된 row 수 int type 리턴
+			int r = pstmt.executeUpdate();
 
-	            // 4. pstmt.set<데이터타입>(? 순서, 값) ex).setString(), .setInt ...
-	            pstmt.setInt(1, a);
-	            pstmt.setString(2, b);
+		} catch (Exception e) {
 
-	            // 5. SQL 문장을 실행하고 결과를 리턴 - SQL 문장 실행 후, 변경된 row 수 int type 리턴
-	            int r = pstmt.executeUpdate();                         
+			System.out.println("[SQL Error : " + e.getMessage() + "]");
 
+		} finally {
 
-	        } catch (Exception e) {
+			// 사용순서와 반대로 close 함
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 
-	            System.out.println("[SQL Error : " + e.getMessage() + "]");
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
-	        } finally {
-
-	            //사용순서와 반대로 close 함
-	            if (pstmt != null) {
-	                try {
-	                    pstmt.close();
-	                } catch (SQLException e) {
-	                    e.printStackTrace();
-	                }
-	            }
-
-	            if (conn != null) {
-	                try {
-	                    conn.close();
-	                } catch (SQLException e) {
-	                    e.printStackTrace();
-	                }
-	            }
-	        }
-		
 	}
 }

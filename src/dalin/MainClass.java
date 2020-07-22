@@ -6,8 +6,8 @@ import db.Thedeldb;
 
 public class MainClass {
 	public static void main(String[] args) {
+		SubClass start = new SubClass();
 		for (;;) {
-			SubClass start = new SubClass();
 			start.SubClass(10);
 		}
 	}
