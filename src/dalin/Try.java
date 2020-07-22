@@ -1,17 +1,14 @@
 package dalin;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import db.Thedeldb;
-import dto.ThedelTB;
 
 public class Try  {
 	public int[][] Try(int a) {
 		ArrayList<Integer> lista = new ArrayList<Integer>();
 		ArrayList<Integer> listb = new ArrayList<Integer>();
 		ArrayList<Boolean> listc = new ArrayList<Boolean>();
-		ThedelTB tb = new ThedelTB();
 		int[][] b = new int[3][a];
 		Operation op = new Operation();
 		int Snop = op.opScan();
