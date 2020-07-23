@@ -5,14 +5,7 @@ public class ThedelTB {
 	private int hap;
 	private String code;
 	private int point;
-	private int rand;
-	public int getRand() {
-		return rand;
-	}
 
-	public void setRand(int rand) {
-		this.rand = rand;
-	}
 
 	public int getPoint() {
 		return point;

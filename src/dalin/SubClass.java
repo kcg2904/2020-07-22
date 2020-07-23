@@ -20,7 +20,6 @@ public class SubClass extends MainClass {
 			hapdb = hapdb + b[2][0];
 			int point = Thedeldb.userselect(id);
 			if (id != null) {
-				// 조건
 				Thedeldb.update(hapdb, id);
 				System.out.println("나의 누적 점수 : " + point);
 			}else {
