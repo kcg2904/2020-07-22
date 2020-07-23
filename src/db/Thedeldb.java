@@ -98,7 +98,7 @@ public class Thedeldb {
 			int count = pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("에러 " + e);
-		} finally {
+		} finally {	
 			try {
 				if (conn != null && !conn.isClosed()) {
 					conn.close();
