@@ -183,7 +183,7 @@ public class Thedeldb {
 			if (rs.next()) {
 
 				int code = rs.getInt(1);
-				TB.setHap(code);
+				TB.setPoint(code);
 
 			}
 
@@ -210,7 +210,7 @@ public class Thedeldb {
 			}
 
 		}
-		int code = TB.getHap();
+		int code = TB.getPoint();
 		return code;
 	}
 

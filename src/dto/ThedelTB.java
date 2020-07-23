@@ -2,7 +2,6 @@ package dto;
 
 public class ThedelTB {
 	private String id;
-	private int hap;
 	private String code;
 	private int point;
 
@@ -23,13 +22,6 @@ public class ThedelTB {
 		this.code = code;
 	}
 
-	public int getHap() {
-		return hap;
-	}
-
-	public void setHap(int hap) {
-		this.hap = hap;
-	}
 
 	public String getId() {
 		return id;
